@@ -1,8 +1,12 @@
+use table::Table;
+
 pub mod table;
 
 pub enum Element {
     Caption,
-    Table,
+    Col,
+    Colgroup,
+    Table(Table),
     Tbody,
     Td,
     Tfoot,
