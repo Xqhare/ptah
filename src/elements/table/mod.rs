@@ -1,12 +1,12 @@
 use crate::attributes::global::GlobalAttribute;
 
-use super::Element;
+use super::TableElement;
 
 pub mod caption;
 
 pub struct Table {
     global_attributes: Vec<GlobalAttribute>,
-    children: Vec<Element>,
+    children: Vec<TableElement>,
 }
 
 impl Default for Table {
@@ -27,29 +27,30 @@ impl Table {
         self.global_attributes.push(attribute);
     }
 
-    pub fn add_child(&mut self, child: Element) {
+    pub fn add_child(&mut self, child: TableElement) {
         if self.allowed_child(&child) {
             self.children.push(child);
         }
     }
 
-    fn allowed_child(&self, child: &Element) -> bool {
+    #[allow(unreachable_patterns)]
+    fn allowed_child(&self, child: &TableElement) -> bool {
         match child {
-            Element::Caption => {
+            TableElement::Caption => {
                 if self.children.is_empty() {
                     true
                 } else {
                     false
                 }
             },
-            Element::Col => true,
-            Element::Colgroup => true,
-            Element::Tbody => true,
-            Element::Td => true,
-            Element::Tfoot => true,
-            Element::Th => true,
-            Element::Thead => true,
-            Element::Tr => true,
+            TableElement::Col => true,
+            TableElement::ColGroup => true,
+            TableElement::TBody => true,
+            TableElement::Td => true,
+            TableElement::TFoot => true,
+            TableElement::Th => true,
+            TableElement::THead => true,
+            TableElement::Tr => true,
             _ => false,
         }
     }
