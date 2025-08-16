@@ -1,8 +1,16 @@
+use base::Base;
 use table::Table;
 
 pub mod table;
+pub mod base;
+
+#[derive(Clone)]
+pub enum HeadContent {
+    Meta(MetadataContent),
+}
 
 /// Almost everything is flow content - a bit of metadata is not
+#[derive(Clone)]
 pub enum FlowContent {
     Address,
     Blockquote,
@@ -18,6 +26,7 @@ pub enum FlowContent {
     Interactive(InteractiveContent),
     Main,
     Menu,
+    Meta(MetadataContent),
     Ol,
     P,
     Phrasing(PhrasingContent),
@@ -30,6 +39,7 @@ pub enum FlowContent {
 }
 
 /// All text of the document
+#[derive(Clone)]
 pub enum PhrasingContent {
     Abbr,
     /// Only for descendants of a `Map` element
@@ -76,12 +86,13 @@ pub enum PhrasingContent {
     Var,
     Wbr,
     /// Literally ASCII text + whitespace only, raw dogging in the file
-    Text,
+    Text(String),
 }
 
+#[derive(Clone)]
 pub enum MetadataContent {
     /// Head only
-    Base,
+    Base(Base),
     /// Phrasing content only if `itemprop` attribute is present
     Link,
     /// Flow and phrasing content only if `itemprop` attribute is present
@@ -92,6 +103,7 @@ pub enum MetadataContent {
     Title,
 }
 
+#[derive(Clone)]
 pub enum InteractiveContent {
     /// May have no `InteractiveContent` or `A`-element children
     /// nor may any child have the `tabindex` attribute specified
@@ -113,6 +125,7 @@ pub enum InteractiveContent {
     Video,
 }
 
+#[derive(Clone)]
 pub enum EmbeddedContent {
     Canvas,
     MathML,
@@ -122,6 +135,7 @@ pub enum EmbeddedContent {
 }
 
 /// Content that defines heading of a section
+#[derive(Clone)]
 pub enum HeadingContent {
     H1,
     H2,
@@ -134,6 +148,7 @@ pub enum HeadingContent {
 }
 
 /// Content that defines the scope of `header` and `footer` elements
+#[derive(Clone)]
 pub enum SectioningContent {
     Article,
     Aside,

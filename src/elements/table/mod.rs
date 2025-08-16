@@ -1,10 +1,12 @@
-use crate::attributes::global::GlobalAttribute;
+use elements::TableElement;
+
+use crate::{attributes::global::GlobalAttribute, error::{table::TableError, PtahError, Result}};
 
 pub mod elements;
 
-
 /// Category: Flow & Palpable
 /// Contexts: Flow
+/// Tag omission: No tag omissible
 /// Content model: This order: Optional caption, 0 or more colgroup, optional thead either [0 or
 /// more tbody] or [1 or more tr elements], optional tfoot
 /// Attributes: Global
@@ -15,6 +17,7 @@ pub mod elements;
 /// The rows and columns form a grid; a table's cell must completely cover that grid without overlap.
 ///
 /// DO NOT USE FOR LAYOUTING -> causes problems for accessibility tools
+#[derive(Clone)]
 pub struct Table {
     global_attributes: Vec<GlobalAttribute>,
     children: Vec<TableElement>,
@@ -38,16 +41,18 @@ impl Table {
         self.global_attributes.push(attribute);
     }
 
-    pub fn add_child(&mut self, child: TableElement) {
+    pub fn add_child(&mut self, child: TableElement) -> Result<()> {
         if self.allowed_child(&child) {
             self.children.push(child);
+            Ok(())
+        } else {
+            Err(PtahError::TableError(TableError::InvalidTableChild))
         }
     }
 
-    #[allow(unreachable_patterns)]
     fn allowed_child(&self, child: &TableElement) -> bool {
         match child {
-            TableElement::Caption => {
+            TableElement::Caption(_) => {
                 if self.children.is_empty() {
                     true
                 } else {
@@ -62,7 +67,6 @@ impl Table {
             TableElement::Th => true,
             TableElement::THead => true,
             TableElement::Tr => true,
-            _ => false,
         }
     }
 }

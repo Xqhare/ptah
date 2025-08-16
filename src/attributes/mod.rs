@@ -1,8 +1,11 @@
 pub mod global;
+
+#[derive(Clone)]
 pub enum Attribute {
     ThAttribute(ThAttribute),
 }
 
+#[derive(Clone)]
 pub enum ThAttribute {
     Abbr(String),
     /// Values higher than 1_000 are commonly ignored
@@ -12,6 +15,7 @@ pub enum ThAttribute {
     Scope(Scope),
 }
 
+#[derive(Clone)]
 pub enum Scope {
     Row,
     Col,
