@@ -2,18 +2,6 @@ use table::Table;
 
 pub mod table;
 
-pub enum TableElement {
-    Caption,
-    Col,
-    ColGroup,
-    TBody,
-    Td,
-    TFoot,
-    Th,
-    THead,
-    Tr,
-}
-
 /// Almost everything is flow content - a bit of metadata is not
 pub enum FlowContent {
     Address,
@@ -63,6 +51,7 @@ pub enum PhrasingContent {
     Kbd,
     Map,
     Mark,
+    Meta(MetadataContent),
     Meter,
     /// NOT IMPLEMENTED IN PTAH - see README
     Noscript,

@@ -1,9 +1,20 @@
 use crate::attributes::global::GlobalAttribute;
 
-use super::TableElement;
+pub mod elements;
 
-pub mod caption;
 
+/// Category: Flow & Palpable
+/// Contexts: Flow
+/// Content model: This order: Optional caption, 0 or more colgroup, optional thead either [0 or
+/// more tbody] or [1 or more tr elements], optional tfoot
+/// Attributes: Global
+/// Spec: https://html.spec.whatwg.org/multipage/tables.html
+///
+/// Represents data with more than one dimension.
+/// Tables have rows, columns, and cells.
+/// The rows and columns form a grid; a table's cell must completely cover that grid without overlap.
+///
+/// DO NOT USE FOR LAYOUTING -> causes problems for accessibility tools
 pub struct Table {
     global_attributes: Vec<GlobalAttribute>,
     children: Vec<TableElement>,
