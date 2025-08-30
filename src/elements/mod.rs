@@ -1,15 +1,13 @@
-use base::Base;
+use metadata::MetadataContent;
 use table::Table;
 
+pub mod body;
+pub mod head;
+pub mod html;
+pub mod metadata;
 pub mod table;
-pub mod base;
 
-#[derive(Clone)]
-pub enum HeadContent {
-    Meta(MetadataContent),
-}
-
-/// Almost everything is flow content - a bit of metadata is not
+/// Basically everything is flow content - a bit of metadata is not
 #[derive(Clone)]
 pub enum FlowContent {
     Address,
@@ -26,7 +24,7 @@ pub enum FlowContent {
     Interactive(InteractiveContent),
     Main,
     Menu,
-    Meta(MetadataContent),
+    Metadata(MetadataContent),
     Ol,
     P,
     Phrasing(PhrasingContent),
@@ -61,7 +59,7 @@ pub enum PhrasingContent {
     Kbd,
     Map,
     Mark,
-    Meta(MetadataContent),
+    Metadata(MetadataContent),
     Meter,
     /// NOT IMPLEMENTED IN PTAH - see README
     Noscript,
@@ -87,20 +85,6 @@ pub enum PhrasingContent {
     Wbr,
     /// Literally ASCII text + whitespace only, raw dogging in the file
     Text(String),
-}
-
-#[derive(Clone)]
-pub enum MetadataContent {
-    /// Head only
-    Base(Base),
-    /// Phrasing content only if `itemprop` attribute is present
-    Link,
-    /// Flow and phrasing content only if `itemprop` attribute is present
-    Meta,
-    /// Can be freely used as `Metadata` and `Phrasing`
-    Template,
-    /// Head only
-    Title,
 }
 
 #[derive(Clone)]

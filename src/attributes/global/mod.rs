@@ -1,4 +1,4 @@
-#[derive(Clone)]
+#[derive(Clone, PartialEq)]
 pub enum GlobalAttribute {
     Accesskey(String),
     Autocapitalize(Autocapitalize),
@@ -38,25 +38,25 @@ pub enum GlobalAttribute {
     Writingsuggestions(bool),
 }
 
-#[derive(Clone)]
+#[derive(Clone, PartialEq)]
 pub enum Virtualkeyboardpolicy {
     Auto,
     Manual,
 }
 
-#[derive(Clone)]
+#[derive(Clone, PartialEq)]
 pub enum Translate {
     Yes,
     No,
 }
 
-#[derive(Clone)]
+#[derive(Clone, PartialEq)]
 pub enum Popover {
     Auto,
     Manual,
 }
 
-#[derive(Clone)]
+#[derive(Clone, PartialEq)]
 pub enum Inputmode {
     None,
     Text,
@@ -68,7 +68,7 @@ pub enum Inputmode {
     Url,
 }
 
-#[derive(Clone)]
+#[derive(Clone, PartialEq)]
 pub enum Enterkeyhint {
     Enter,
     Done,
@@ -79,21 +79,21 @@ pub enum Enterkeyhint {
     Send,
 }
 
-#[derive(Clone)]
+#[derive(Clone, PartialEq)]
 pub enum Dir {
     Auto,
     Ltr,
     Rtl,
 }
 
-#[derive(Clone)]
+#[derive(Clone, PartialEq)]
 pub enum Contenteditable {
     True,
     False,
     PlaintextOnly,
 }
 
-#[derive(Clone)]
+#[derive(Clone, PartialEq)]
 pub enum Autocapitalize {
     Off,
     None,

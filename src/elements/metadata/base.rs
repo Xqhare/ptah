@@ -10,7 +10,7 @@ use crate::{attributes::global::GlobalAttribute, error::{base::BaseError, PtahEr
 ///
 /// Allows specification of the document base url, the name of the default navigable.
 /// Either the `href` or the `target` attribute must be present or both
-#[derive(Clone)]
+#[derive(Clone, PartialEq)]
 pub struct Base {
     global_attributes: Vec<GlobalAttribute>,
     href: Option<String>,
